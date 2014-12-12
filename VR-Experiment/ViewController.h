@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SceneKit/SceneKit.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface ViewController : UIViewController
 
+@property (nonatomic) IBOutlet SCNView *leftSceneView;
+@property (nonatomic) IBOutlet SCNView *rightSceneView;
+
+@property (nonatomic) CMMotionManager *motionManager;
 
 @end
 

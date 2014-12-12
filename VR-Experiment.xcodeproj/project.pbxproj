@@ -14,6 +14,8 @@
 		FC2609C81A3A68590000E7A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2609C71A3A68590000E7A4 /* Images.xcassets */; };
 		FC2609CB1A3A68590000E7A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */; };
 		FC2609D71A3A68590000E7A4 /* VR_ExperimentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */; };
+		FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */; };
+		FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E21A3A68810000E7A4 /* SceneKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		FC2609D01A3A68590000E7A4 /* VR-ExperimentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VR-ExperimentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2609D51A3A68590000E7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VR_ExperimentTests.m; sourceTree = "<group>"; };
+		FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		FC2609E21A3A68810000E7A4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */,
+				FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +69,8 @@
 		FC2609AE1A3A68590000E7A4 = {
 			isa = PBXGroup;
 			children = (
+				FC2609E21A3A68810000E7A4 /* SceneKit.framework */,
+				FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */,
 				FC2609B91A3A68590000E7A4 /* VR-Experiment */,
 				FC2609D31A3A68590000E7A4 /* VR-ExperimentTests */,
 				FC2609B81A3A68590000E7A4 /* Products */,
