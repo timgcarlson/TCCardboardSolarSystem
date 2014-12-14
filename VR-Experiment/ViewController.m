@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TCVRCamera.h"
 
 @interface ViewController ()
 
@@ -25,48 +26,16 @@
     _leftSceneView.scene = scene;
     _rightSceneView.scene = scene;
     
-    // Create the cameras
-    SCNCamera *leftCamera = [SCNCamera camera];
-    leftCamera.xFov = 45;
-    leftCamera.yFov = 45;
     
-    SCNCamera *rightCamera = [SCNCamera camera];
-    rightCamera.xFov = 45;
-    rightCamera.yFov = 45;
+    //////////
     
-    // Attach the cameras to nodes
-    // TODO: The offset value at which the cameras should be shifted is open for customization
-    SCNNode *leftCameraNode = [SCNNode node];
-    leftCameraNode.camera = leftCamera;
-    leftCameraNode.position = SCNVector3Make(-.25, 0, 0);
+    TCVRCamera *vrCamera = [[TCVRCamera alloc] init];
+    [scene.rootNode addChildNode:vrCamera.camerasMotionNode];
     
-    SCNNode *rightCameraNode = [SCNNode node];
-    rightCameraNode.camera = rightCamera;
-    rightCameraNode.position = SCNVector3Make(.25, 0, 0);
+    //////////
     
-    SCNNode *camerasNode = [SCNNode node];
-    [camerasNode addChildNode:leftCameraNode];
-    [camerasNode addChildNode:rightCameraNode];
-    
-    // Need to adjust the initial orientation to be the position the user will be holding their phone (in front of face)
-    camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
-    
-    // Roll: up/down head movement
-    SCNNode *cameraRollNode = [SCNNode node];
-    [cameraRollNode addChildNode:camerasNode];
-    
-    // Pitch: left/right head movement
-    SCNNode *cameraPitchNode = [SCNNode node];
-    [cameraPitchNode addChildNode:cameraRollNode];
-    
-    // Yaw: diagonal head movement
-    SCNNode *cameraYawNode = [SCNNode node];
-    [cameraYawNode addChildNode:cameraPitchNode];
-    
-    [scene.rootNode addChildNode:cameraYawNode];
-    
-    _leftSceneView.pointOfView = leftCameraNode;
-    _rightSceneView.pointOfView = rightCameraNode;
+    _leftSceneView.pointOfView = vrCamera.leftCameraNode;
+    _rightSceneView.pointOfView = vrCamera.rightCameraNode;
     
     // Add ambient lighting
     SCNLight *ambientLight = [SCNLight light];
@@ -92,7 +61,7 @@
     SCNNode *spotLightNode = [SCNNode node];
     spotLightNode.light = spotLight;
     spotLightNode.position = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
-    [camerasNode addChildNode:spotLightNode];
+    [scene.rootNode addChildNode:spotLightNode];
     
     // Spotlight Color Animation
     CAKeyframeAnimation *colorBallAnimation = [CAKeyframeAnimation animationWithKeyPath:@"color"];
@@ -142,25 +111,6 @@
     spinBallAnimation.duration = 3.0;
     spinBallAnimation.repeatCount = HUGE_VALF;
     [ballNode addAnimation:spinBallAnimation forKey:@"spin"];
-    
-    
-    
-    // Respond to head movements
-    _motionManager = [[CMMotionManager alloc] init];
-    _motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
-    [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical
-                                                        toQueue:[NSOperationQueue mainQueue]
-                                                    withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                                                        CMAttitude *currentAttitude = motion.attitude;
-                                                        double roll = currentAttitude.roll;
-                                                        double pitch = currentAttitude.pitch;
-                                                        double yaw = currentAttitude.yaw;
-                                                        
-                                                        // update the cameras
-                                                        cameraRollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
-                                                        cameraPitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
-                                                        cameraYawNode.eulerAngles = SCNVector3Make(0, yaw, 0);
-                                                    }];
     
 }
 
