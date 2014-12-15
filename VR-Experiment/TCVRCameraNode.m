@@ -55,19 +55,20 @@
         [camerasNode addChildNode:self.rightCameraNode];
         camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
         
-        // Roll: up/down head movement
+        // Roll: (1, 0, 0)
         _rollNode = [SCNNode node];
         [_rollNode addChildNode:camerasNode];
         
-        // Pitch: left/right head movement
+        // Pitch: (0, 0, 1)
         _pitchNode = [SCNNode node];
         [_pitchNode addChildNode:_rollNode];
         
-        // Yaw: diagonal head movement
+        // Yaw: (0, 1, 0)
         _yawNode = [SCNNode node];
         [_yawNode addChildNode:_pitchNode];
         
         [self addChildNode:_yawNode];
+        
         
         // Respond to head movements
         if (addCameraMotion) {
@@ -95,7 +96,9 @@
                                                         double pitch = currentAttitude.pitch;
                                                         double yaw = currentAttitude.yaw;
                                                         
-                                                        // update the cameras
+                                                        NSLog(@"(roll: %f, yaw: %f, pitch: %f", roll, yaw, pitch);
+                                                        
+                                                        // update the cameras (roll, yaw, pitch)
                                                         _rollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
                                                         _pitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
                                                         _yawNode.eulerAngles = SCNVector3Make(0, yaw, 0);
