@@ -96,8 +96,6 @@
                                                         double pitch = currentAttitude.pitch;
                                                         double yaw = currentAttitude.yaw;
                                                         
-                                                        NSLog(@"(roll: %f, yaw: %f, pitch: %f", roll, yaw, pitch);
-                                                        
                                                         // update the cameras (roll, yaw, pitch)
                                                         _rollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
                                                         _pitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
