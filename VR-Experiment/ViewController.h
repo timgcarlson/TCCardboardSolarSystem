@@ -15,7 +15,5 @@
 @property (nonatomic) IBOutlet SCNView *leftSceneView;
 @property (nonatomic) IBOutlet SCNView *rightSceneView;
 
-@property (nonatomic) CMMotionManager *motionManager;
-
 @end
 

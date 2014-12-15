@@ -26,20 +26,15 @@
     _leftSceneView.scene = scene;
     _rightSceneView.scene = scene;
     
-    
-    //////////
-    
-    TCVRCamera *vrCamera = [[TCVRCamera alloc] init];
+    // Create camera and add to the scene and views
+    TCVRCamera *vrCamera = [[TCVRCamera alloc] initWithCameraMotion:YES];
     [scene.rootNode addChildNode:vrCamera.camerasMotionNode];
-    
-    //////////
-    
     _leftSceneView.pointOfView = vrCamera.leftCameraNode;
     _rightSceneView.pointOfView = vrCamera.rightCameraNode;
     
     // Add ambient lighting
     SCNLight *ambientLight = [SCNLight light];
-    ambientLight.type =SCNLightTypeAmbient;
+    ambientLight.type = SCNLightTypeAmbient;
     ambientLight.color = [UIColor colorWithWhite:0.1 alpha:1.0];
     SCNNode *ambientLightNode = [SCNNode node];
     ambientLightNode.light = ambientLight;

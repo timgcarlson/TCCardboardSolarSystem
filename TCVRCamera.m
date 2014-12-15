@@ -19,6 +19,10 @@
 @property (nonatomic) SCNNode *rollNode;
 @property (nonatomic) SCNNode *pitchNode;
 @property (nonatomic) SCNNode *yawNode;
+
+// Camera Nodes
+@property (nonatomic, readwrite) SCNNode *leftCameraNode;
+@property (nonatomic, readwrite) SCNNode *rightCameraNode;
 @property (nonatomic, readwrite) SCNNode *camerasMotionNode;
 
 @property (nonatomic) CMMotionManager *motionManager;
@@ -28,6 +32,10 @@
 @implementation TCVRCamera
 
 - (instancetype)init {
+    return [self initWithCameraMotion:YES];
+}
+
+- (instancetype)initWithCameraMotion:(BOOL)addCameraMotion {
     if (self = [super init]) {
         _leftCamera = [SCNCamera camera];
         _leftCamera.xFov = 45;
@@ -65,28 +73,42 @@
         self.camerasMotionNode = _yawNode;
         
         // Respond to head movements
-        _motionManager = [[CMMotionManager alloc] init];
-        _motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
-        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical
-                                                            toQueue:[NSOperationQueue mainQueue]
-                                                        withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                                                            CMAttitude *currentAttitude = motion.attitude;
-                                                            double roll = currentAttitude.roll;
-                                                            double pitch = currentAttitude.pitch;
-                                                            double yaw = currentAttitude.yaw;
-                                                            
-                                                            // update the cameras
-                                                            _rollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
-                                                            _pitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
-                                                            _yawNode.eulerAngles = SCNVector3Make(0, yaw, 0);
-                                                        }];
-
-        
+        if (addCameraMotion) {
+            [self startCameraMotion];
+        }
     }
     
     return self;
 }
 
+#pragma mark - Motion Updates
+
+- (void)startCameraMotion {
+    if (!_motionManager) {
+        _motionManager = [[CMMotionManager alloc] init];
+        _motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
+    }
+    
+    [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical
+                                                        toQueue:[[NSOperationQueue alloc] init]
+                                                    withHandler:^(CMDeviceMotion *motion, NSError *error) {
+                                                        CMAttitude *currentAttitude = motion.attitude;
+                                                        double roll = currentAttitude.roll;
+                                                        double pitch = currentAttitude.pitch;
+                                                        double yaw = currentAttitude.yaw;
+                                                        
+                                                        // update the cameras
+                                                        _rollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
+                                                        _pitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
+                                                        _yawNode.eulerAngles = SCNVector3Make(0, yaw, 0);
+                                                    }];
+}
+
+- (void)stopCameraMotion {
+    if (_motionManager) {
+        [_motionManager stopDeviceMotionUpdates];
+    }
+}
 
 #pragma mark - Conversion Methods
 
