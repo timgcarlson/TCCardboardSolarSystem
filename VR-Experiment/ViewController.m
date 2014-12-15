@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "TCVRCamera.h"
+#import "TCVRCameraNode.h"
 
 @interface ViewController ()
 
@@ -27,10 +27,10 @@
     _rightSceneView.scene = scene;
     
     // Create camera and add to the scene and views
-    TCVRCamera *vrCamera = [[TCVRCamera alloc] initWithCameraMotion:YES];
-    [scene.rootNode addChildNode:vrCamera.camerasMotionNode];
-    _leftSceneView.pointOfView = vrCamera.leftCameraNode;
-    _rightSceneView.pointOfView = vrCamera.rightCameraNode;
+    TCVRCameraNode *vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
+    [scene.rootNode addChildNode:vrCameraNode];
+    _leftSceneView.pointOfView = vrCameraNode.leftCameraNode;
+    _rightSceneView.pointOfView = vrCameraNode.rightCameraNode;
     
     // Add ambient lighting
     SCNLight *ambientLight = [SCNLight light];

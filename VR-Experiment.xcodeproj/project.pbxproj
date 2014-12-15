@@ -16,7 +16,7 @@
 		FC2609D71A3A68590000E7A4 /* VR_ExperimentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */; };
 		FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */; };
 		FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E21A3A68810000E7A4 /* SceneKit.framework */; };
-		FC26F90B1A3E30D400404028 /* TCVRCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = FC26F90A1A3E30D400404028 /* TCVRCamera.m */; };
+		FC26F9111A3E74C000404028 /* TCVRCameraNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC26F9101A3E74C000404028 /* TCVRCameraNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,8 @@
 		FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VR_ExperimentTests.m; sourceTree = "<group>"; };
 		FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FC2609E21A3A68810000E7A4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
-		FC26F9091A3E30D400404028 /* TCVRCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCVRCamera.h; path = ../TCVRCamera.h; sourceTree = "<group>"; };
-		FC26F90A1A3E30D400404028 /* TCVRCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCVRCamera.m; path = ../TCVRCamera.m; sourceTree = "<group>"; };
+		FC26F90F1A3E74C000404028 /* TCVRCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCVRCameraNode.h; sourceTree = "<group>"; };
+		FC26F9101A3E74C000404028 /* TCVRCameraNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCVRCameraNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +96,8 @@
 				FC2609BF1A3A68590000E7A4 /* AppDelegate.m */,
 				FC2609C11A3A68590000E7A4 /* ViewController.h */,
 				FC2609C21A3A68590000E7A4 /* ViewController.m */,
-				FC26F9091A3E30D400404028 /* TCVRCamera.h */,
-				FC26F90A1A3E30D400404028 /* TCVRCamera.m */,
+				FC26F90F1A3E74C000404028 /* TCVRCameraNode.h */,
+				FC26F9101A3E74C000404028 /* TCVRCameraNode.m */,
 				FC2609C41A3A68590000E7A4 /* Main.storyboard */,
 				FC2609C71A3A68590000E7A4 /* Images.xcassets */,
 				FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */,
@@ -232,10 +232,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC26F9111A3E74C000404028 /* TCVRCameraNode.m in Sources */,
 				FC2609C31A3A68590000E7A4 /* ViewController.m in Sources */,
 				FC2609C01A3A68590000E7A4 /* AppDelegate.m in Sources */,
 				FC2609BD1A3A68590000E7A4 /* main.m in Sources */,
-				FC26F90B1A3E30D400404028 /* TCVRCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

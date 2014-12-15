@@ -1,19 +1,17 @@
 //
-//  TCVRCamera.m
+//  TCVRCameraNode.m
 //  VR-Experiment
 //
 //  Created by Tim Carlson on 12/14/14.
 //  Copyright (c) 2014 Tim Carlson. All rights reserved.
 //
 
-#import "TCVRCamera.h"
+#import "TCVRCameraNode.h"
 
-@interface TCVRCamera ()
+@interface TCVRCameraNode ()
 
 @property (nonatomic) SCNCamera *leftCamera;
 @property (nonatomic) SCNCamera *rightCamera;
-
-@property (nonatomic) SCNNode *camerasNode;
 
 // Motion nodes
 @property (nonatomic) SCNNode *rollNode;
@@ -23,13 +21,12 @@
 // Camera Nodes
 @property (nonatomic, readwrite) SCNNode *leftCameraNode;
 @property (nonatomic, readwrite) SCNNode *rightCameraNode;
-@property (nonatomic, readwrite) SCNNode *camerasMotionNode;
 
 @property (nonatomic) CMMotionManager *motionManager;
 
 @end
 
-@implementation TCVRCamera
+@implementation TCVRCameraNode
 
 - (instancetype)init {
     return [self initWithCameraMotion:YES];
@@ -53,14 +50,14 @@
         self.rightCameraNode.camera = _rightCamera;
         self.rightCameraNode.position = SCNVector3Make(.5, 0, 0);
         
-        _camerasNode = [SCNNode node];
-        [_camerasNode addChildNode:self.leftCameraNode];
-        [_camerasNode addChildNode:self.rightCameraNode];
-        _camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
+        SCNNode *camerasNode = [SCNNode node];
+        [camerasNode addChildNode:self.leftCameraNode];
+        [camerasNode addChildNode:self.rightCameraNode];
+        camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
         
         // Roll: up/down head movement
         _rollNode = [SCNNode node];
-        [_rollNode addChildNode:_camerasNode];
+        [_rollNode addChildNode:camerasNode];
         
         // Pitch: left/right head movement
         _pitchNode = [SCNNode node];
@@ -70,7 +67,7 @@
         _yawNode = [SCNNode node];
         [_yawNode addChildNode:_pitchNode];
         
-        self.camerasMotionNode = _yawNode;
+        [self addChildNode:_yawNode];
         
         // Respond to head movements
         if (addCameraMotion) {
@@ -80,6 +77,7 @@
     
     return self;
 }
+
 
 #pragma mark - Motion Updates
 
@@ -109,6 +107,7 @@
         [_motionManager stopDeviceMotionUpdates];
     }
 }
+
 
 #pragma mark - Conversion Methods
 
