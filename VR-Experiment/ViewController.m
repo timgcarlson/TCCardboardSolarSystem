@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _leftSceneView.backgroundColor = [UIColor lightGrayColor];
-    _rightSceneView.backgroundColor = [UIColor lightGrayColor];
+    _leftSceneView.backgroundColor = [UIColor blackColor];
+    _rightSceneView.backgroundColor = [UIColor blackColor];
     
     // Create the scene
     SCNScene *scene = [SCNScene scene];
@@ -32,87 +32,64 @@
     _leftSceneView.pointOfView = vrCameraNode.leftCameraNode;
     _rightSceneView.pointOfView = vrCameraNode.rightCameraNode;
     
-    // Add ambient lighting
-    SCNLight *ambientLight = [SCNLight light];
-    ambientLight.type = SCNLightTypeAmbient;
-    ambientLight.color = [UIColor colorWithWhite:0.1 alpha:1.0];
-    SCNNode *ambientLightNode = [SCNNode node];
-    ambientLightNode.light = ambientLight;
-    [scene.rootNode addChildNode:ambientLightNode];
     
-    // Omni/Point Light
-    SCNLight *omniLight = [SCNLight light];
-    omniLight.type = SCNLightTypeOmni;
-    omniLight.color = [UIColor colorWithWhite:1.0 alpha:1.0];
-    SCNNode *omniLightNode = [SCNNode node];
-    omniLightNode.light = omniLight;
-    omniLightNode.position = SCNVector3Make(-30, 30, 50);
-    [scene.rootNode addChildNode:omniLightNode];
-    
-    // Spot Light
-    SCNLight *spotLight = [SCNLight light];
-    spotLight.type = SCNLightTypeSpot;
-    spotLight.color = [UIColor redColor];
-    SCNNode *spotLightNode = [SCNNode node];
-    spotLightNode.light = spotLight;
-    spotLightNode.position = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
-    [scene.rootNode addChildNode:spotLightNode];
-    
-    // Spotlight Color Animation
-    CAKeyframeAnimation *colorBallAnimation = [CAKeyframeAnimation animationWithKeyPath:@"color"];
-    colorBallAnimation.values = @[[UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor redColor]];
-    colorBallAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    colorBallAnimation.repeatCount = INFINITY;
-    colorBallAnimation.duration = 3.0;
-    [spotLight addAnimation:colorBallAnimation forKey:@"ChangeTheColorOfTheSpotLight"];
-    
-    // Create the floor
-    SCNFloor *floor = [SCNFloor floor];
-    floor.reflectivity = 0.15;
-    SCNMaterial *floorMaterial = [SCNMaterial material];
-    floorMaterial.diffuse.contents = [UIColor blueColor];
-    floorMaterial.specular.contents = [UIColor blueColor];
-    floor.materials = @[floorMaterial];
-    SCNNode *floorNode = [SCNNode nodeWithGeometry:floor];
-    floorNode.position = SCNVector3Make(0, -1, 0);
-    [scene.rootNode addChildNode:floorNode];
+    // Have a planet orbit the camera
+    SCNNode *orbitPoint = [SCNNode node];
+    orbitPoint.position = vrCameraNode.position;
+    [vrCameraNode addChildNode:orbitPoint];
     
     // Create the ball
-    SCNSphere *ball = [SCNSphere sphereWithRadius:1.0];
-    SCNNode *ballNode = [SCNNode nodeWithGeometry:ball];
-    ballNode.position = SCNVector3Make(0, 3, -10);
-    [scene.rootNode addChildNode:ballNode];
+    SCNSphere *planet = [SCNSphere sphereWithRadius:1.0];
+    SCNNode *planetNode = [SCNNode nodeWithGeometry:planet];
+    planetNode.position = SCNVector3Make(0, 3, -10);
+    
     // Add a pattern to the ball
-    SCNMaterial *ballMaterial = [SCNMaterial material];
-    ballMaterial.diffuse.contents = [UIImage imageNamed:@"linesPattern"];
-    ballMaterial.specular.contents = [UIColor whiteColor];
-    ballMaterial.shininess = 1.f;
-    ball.materials = @[ballMaterial];
+    SCNMaterial *planetMaterial = [SCNMaterial material];
+    planetMaterial.diffuse.contents = [UIImage imageNamed:@"linesPattern"];
+    planetMaterial.specular.contents = [UIColor whiteColor];
+    planetMaterial.shininess = 1.f;
+    planet.materials = @[planetMaterial];
+    [orbitPoint addChildNode:planetNode];
+
+    // Rotate ball around orbit point
+    CABasicAnimation *planetRotationAnimation = [CABasicAnimation animationWithKeyPath:@"rotation"];
+    planetRotationAnimation.duration = 10.0;
+    planetRotationAnimation.toValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 1, 0, M_PI * 2)];
+    planetRotationAnimation.repeatCount = FLT_MAX;
+    [orbitPoint addAnimation:planetRotationAnimation forKey:@"planet rotation around orbit point"];
     
-    // Bounce the ball
-    CABasicAnimation *bounceBallAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    bounceBallAnimation.byValue = [NSValue valueWithSCNVector3:SCNVector3Make(0, -3.05, 0)];
-    bounceBallAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    bounceBallAnimation.autoreverses = YES;
-    bounceBallAnimation.repeatCount = HUGE_VALF;
-    bounceBallAnimation.duration = 0.5;
-    // Add the animation to the ball
-    [ballNode addAnimation:bounceBallAnimation forKey:@"bounce"];
+    // Rotate the Earth
+    planetRotationAnimation = [CABasicAnimation animationWithKeyPath:@"rotation"];
+    planetRotationAnimation.duration = 1.0;
+    planetRotationAnimation.fromValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 1, 0, 0)];
+    planetRotationAnimation.toValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 1, 0, M_PI * 2)];
+    planetRotationAnimation.repeatCount = FLT_MAX;
+    [planetNode addAnimation:planetRotationAnimation forKey:@"planet rotation"];
     
-    // Spin
-    CABasicAnimation *spinBallAnimation = [CABasicAnimation animationWithKeyPath:@"rotation"];
-    spinBallAnimation.fromValue = [NSValue valueWithSCNVector4:SCNVector4Make(0, 0, 1, 0)];
-    spinBallAnimation.toValue = [NSValue valueWithSCNVector4:SCNVector4Make(2 * M_PI, 0, 1, 2 * M_PI)];
-    spinBallAnimation.duration = 3.0;
-    spinBallAnimation.repeatCount = HUGE_VALF;
-    [ballNode addAnimation:spinBallAnimation forKey:@"spin"];
+    // Add material to planet
+    planetNode.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"earth-diffuse-mini"];
+    planetNode.geometry.firstMaterial.emission.contents = [UIImage imageNamed:@"earth-emissive-mini"];
+    planetNode.geometry.firstMaterial.specular.contents = [UIImage imageNamed:@"earth-specular-mini"];
+    planetNode.geometry.firstMaterial.locksAmbientWithDiffuse = YES;
+    planetNode.geometry.firstMaterial.shininess = 0.1;
+    planetNode.geometry.firstMaterial.specular.intensity = 0.5;
     
+    // Add light to scene
+    SCNNode *omnilightNode = [SCNNode node];
+    omnilightNode.light = [SCNLight light];
+    omnilightNode.light.color = [UIColor whiteColor];
+    omnilightNode.light.type = SCNLightTypeOmni;
+    [orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Helper Methods
+
 
 #pragma mark - Conversion Methods
 
