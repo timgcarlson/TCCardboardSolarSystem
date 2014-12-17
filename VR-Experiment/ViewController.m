@@ -5,6 +5,8 @@
 //  Created by Tim Carlson on 12/11/14.
 //  Copyright (c) 2014 Tim Carlson. All rights reserved.
 //
+//  Using planet bitmaps from http://freebitmaps.blogspot.com/search?updated-max=2010-12-16T19:40:00-08:00&max-results=3
+//
 
 #import "ViewController.h"
 #import "TCVRCameraNode.h"
@@ -26,6 +28,7 @@
     // right, left, top, bottom, back, front (+X, -X, +Y, -Y, +Z, -Z)
     scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
     
+    
     // Create camera and add to the scene and views
     TCVRCameraNode *vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
     [scene.rootNode addChildNode:vrCameraNode];
@@ -34,17 +37,61 @@
     
     // Create the central orbit point
     SCNNode *orbitPoint = [SCNNode node];
-    orbitPoint.position = vrCameraNode.position;
-    [vrCameraNode addChildNode:orbitPoint];
+    orbitPoint.position = SCNVector3Make(vrCameraNode.position.x, vrCameraNode.position.y, vrCameraNode.position.z);
+    [scene.rootNode addChildNode:orbitPoint];
     
-    // Demo Planets
-    SCNNode *planet1 = [self createPlanetNodeAboutOrbitNode:orbitPoint withPlanetRadius:1.0 orbitRadius:15.0 tiltRadians:0 orbitDuration:75.0 rotationDuration:1.0];
-    SCNNode *planet1_moon1 = [self createPlanetNodeAboutOrbitNode:planet1 withPlanetRadius:.35 orbitRadius:5.0 tiltRadians:M_PI/2 orbitDuration:3.0 rotationDuration:6.0];
-    SCNNode *planet1_moon2 = [self createPlanetNodeAboutOrbitNode:planet1 withPlanetRadius:.75 orbitRadius:13.0 tiltRadians:0 orbitDuration:8.0 rotationDuration:9.0];
-    SCNNode *planet1_moon1_1 = [self createPlanetNodeAboutOrbitNode:planet1_moon1 withPlanetRadius:.25 orbitRadius:2.0 tiltRadians:-M_PI/2 orbitDuration:2.0 rotationDuration:3.0];
     
-    SCNNode *planet2 = [self createPlanetNodeAboutOrbitNode:orbitPoint withPlanetRadius:4.0 orbitRadius:30.0 tiltRadians:M_PI/8 orbitDuration:100.0 rotationDuration:15.0];
-
+    /////// Add the sun
+    orbitPoint.geometry = [SCNSphere sphereWithRadius:3.0];
+    SCNNode *sunHaloNode = [SCNNode node];
+    sunHaloNode.geometry = [SCNPlane planeWithWidth:40 height:40];
+    sunHaloNode.rotation = SCNVector4Make(1, 0, 0, M_PI / 180.0);
+    sunHaloNode.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"sun-halo"];
+    sunHaloNode.geometry.firstMaterial.lightingModelName = SCNLightingModelConstant;
+    sunHaloNode.geometry.firstMaterial.writesToDepthBuffer = NO;
+    sunHaloNode.opacity = 0.3;
+    [orbitPoint addChildNode:sunHaloNode];
+    
+    orbitPoint.geometry.firstMaterial.multiply.contents = [UIImage imageNamed:@"sun"];
+    orbitPoint.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"sun"];
+    orbitPoint.geometry.firstMaterial.multiply.intensity = 0.5;
+    orbitPoint.geometry.firstMaterial.lightingModelName = SCNLightingModelConstant;
+    
+    orbitPoint.geometry.firstMaterial.multiply.wrapS =
+    orbitPoint.geometry.firstMaterial.diffuse.wrapS  =
+    orbitPoint.geometry.firstMaterial.multiply.wrapT =
+    orbitPoint.geometry.firstMaterial.diffuse.wrapT  = SCNWrapModeRepeat;
+    orbitPoint.geometry.firstMaterial.locksAmbientWithDiffuse   = YES;
+    
+    // Achieve a lava effect by animating textures
+    CABasicAnimation *sunAnimation = [CABasicAnimation animationWithKeyPath:@"contentsTransform"];
+    sunAnimation.duration = 10.0;
+    sunAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0), CATransform3DMakeScale(3, 3, 3))];
+    sunAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(1, 0, 0), CATransform3DMakeScale(3, 3, 3))];
+    sunAnimation.repeatCount = FLT_MAX;
+    [orbitPoint.geometry.firstMaterial.diffuse addAnimation:sunAnimation forKey:@"sun-texture"];
+    
+    sunAnimation = [CABasicAnimation animationWithKeyPath:@"contentsTransform"];
+    sunAnimation.duration = 30.0;
+    sunAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0), CATransform3DMakeScale(5, 5, 5))];
+    sunAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(1, 0, 0), CATransform3DMakeScale(5, 5, 5))];
+    sunAnimation.repeatCount = FLT_MAX;
+    [orbitPoint.geometry.firstMaterial.multiply addAnimation:sunAnimation forKey:@"sun-texture2"];
+    ////////
+    
+    
+    // Create misc planets
+    for (int i = 0; i < 13; i++) {
+        NSDictionary *planet3Textures = @{@"diffuse" : [NSString stringWithFormat: @"miscPlanet_%d", i]};
+        
+        float pRadius = (((float)arc4random()/0x100000000) * 3);
+        float oRadius = 10 + arc4random() % 40;
+        float tilt = -(M_PI/4) + (((float)arc4random()/0x100000000) * (M_PI/2));
+        float oDuration = 5 + arc4random() % 75;
+        float rDuration = 5 + arc4random() % 15;
+        
+        [self createPlanetNodeAboutOrbitNode:orbitPoint withPlanetRadius:pRadius orbitRadius:oRadius tiltRadians:tilt orbitDuration:oDuration rotationDuration:rDuration withTextures:planet3Textures];
+    }
 
     // Add light to scene
     SCNNode *omnilightNode = [SCNNode node];
@@ -52,6 +99,9 @@
     omnilightNode.light.color = [UIColor whiteColor];
     omnilightNode.light.type = SCNLightTypeOmni;
     [orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
+    
+    // Set the viewing position
+    vrCameraNode.position = SCNVector3Make(0, 0, 75);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,13 +112,13 @@
 
 #pragma mark - Helper Methods
 
-- (SCNNode *)createPlanetNodeAboutOrbitNode:(SCNNode *)orbitNode withPlanetRadius:(CGFloat)planetRadius orbitRadius:(CGFloat)orbitRadius tiltRadians:(CGFloat)tilt orbitDuration:(CGFloat)orbitDuration rotationDuration:(CGFloat)rotationDuration {
+- (SCNNode *)createPlanetNodeAboutOrbitNode:(SCNNode *)orbitNode withPlanetRadius:(CGFloat)planetRadius orbitRadius:(CGFloat)orbitRadius tiltRadians:(CGFloat)tilt orbitDuration:(CGFloat)orbitDuration rotationDuration:(CGFloat)rotationDuration withTextures:(NSDictionary *)texturesDict {
     
     SCNNode *planetRotationNode = [SCNNode node];
     [orbitNode addChildNode:planetRotationNode];
     
     SCNNode *planetGroupNode = [SCNNode node];
-    planetGroupNode.position = SCNVector3Make(0, 0, -(orbitRadius));
+    planetGroupNode.position = SCNVector3Make(-orbitRadius + (((float)arc4random()/0x100000000) * (2 * orbitRadius)), 0, -(orbitRadius));
     [planetRotationNode addChildNode:planetGroupNode];
     
     SCNSphere *planet = [SCNSphere sphereWithRadius:planetRadius];
@@ -92,12 +142,19 @@
     [planetNode addAnimation:planetRotationAnimation forKey:@"planet rotation"];
     
     // Add material to planet
-    planetNode.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"earth-diffuse-mini"];
-    planetNode.geometry.firstMaterial.emission.contents = [UIImage imageNamed:@"earth-emissive-mini"];
-    planetNode.geometry.firstMaterial.specular.contents = [UIImage imageNamed:@"earth-specular-mini"];
-    planetNode.geometry.firstMaterial.locksAmbientWithDiffuse = YES;
-    planetNode.geometry.firstMaterial.shininess = 0.1;
-    planetNode.geometry.firstMaterial.specular.intensity = 0.5;
+    if (texturesDict) {
+        planetNode.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:texturesDict[@"diffuse"]];
+        planetNode.geometry.firstMaterial.locksAmbientWithDiffuse = YES;
+        planetNode.geometry.firstMaterial.shininess = 0.1;
+        planetNode.geometry.firstMaterial.specular.intensity = 0.5;
+    } else {
+        planetNode.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"earth-diffuse-mini"];
+        planetNode.geometry.firstMaterial.emission.contents = [UIImage imageNamed:@"earth-emissive-mini"];
+        planetNode.geometry.firstMaterial.specular.contents = [UIImage imageNamed:@"earth-specular-mini"];
+        planetNode.geometry.firstMaterial.locksAmbientWithDiffuse = YES;
+        planetNode.geometry.firstMaterial.shininess = 0.1;
+        planetNode.geometry.firstMaterial.specular.intensity = 0.5;
+    }
     
     return planetGroupNode;
 }
