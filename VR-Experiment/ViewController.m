@@ -24,7 +24,7 @@
     _rightSceneView.scene = scene;
     
     // right, left, top, bottom, back, front (+X, -X, +Y, -Y, +Z, -Z)
-    scene.background.contents = @[[UIImage imageNamed:@"space_right1"], [UIImage imageNamed:@"space_left2"], [UIImage imageNamed:@"space_top3"], [UIImage imageNamed:@"space_bottom4"], [UIImage imageNamed:@"space_back6"], [UIImage imageNamed:@"space_front5"]];
+    scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
     
     // Create camera and add to the scene and views
     TCVRCameraNode *vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
