@@ -98,10 +98,13 @@
     omnilightNode.light = [SCNLight light];
     omnilightNode.light.color = [UIColor whiteColor];
     omnilightNode.light.type = SCNLightTypeOmni;
+    omnilightNode.light.attenuationStartDistance = 0.f;
+    omnilightNode.light.attenuationEndDistance = 100.f;
+    omnilightNode.light.attenuationFalloffExponent = 2.f;
     [orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
     
     // Set the viewing position
-    vrCameraNode.position = SCNVector3Make(0, 0, 75);
+    vrCameraNode.position = SCNVector3Make(0, 0, 50);
 }
 
 - (void)didReceiveMemoryWarning {

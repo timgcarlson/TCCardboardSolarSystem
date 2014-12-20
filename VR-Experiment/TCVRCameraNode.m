@@ -69,7 +69,6 @@
         
         [self addChildNode:_yawNode];
         
-        
         // Respond to head movements
         if (addCameraMotion) {
             [self startCameraMotion];
