@@ -17,6 +17,7 @@
 		FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */; };
 		FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E21A3A68810000E7A4 /* SceneKit.framework */; };
 		FC26F9111A3E74C000404028 /* TCVRCameraNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC26F9101A3E74C000404028 /* TCVRCameraNode.m */; };
+		FC61C4171A4B441100FE943D /* TCCardboardMagneticSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */; };
 		FC7B9E4B1A474394008E325A /* TCPlanetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B9E4A1A474394008E325A /* TCPlanetNode.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,8 @@
 		FC2609E21A3A68810000E7A4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		FC26F90F1A3E74C000404028 /* TCVRCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCVRCameraNode.h; sourceTree = "<group>"; };
 		FC26F9101A3E74C000404028 /* TCVRCameraNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCVRCameraNode.m; sourceTree = "<group>"; };
+		FC61C4151A4B441100FE943D /* TCCardboardMagneticSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCardboardMagneticSensor.h; sourceTree = "<group>"; };
+		FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCCardboardMagneticSensor.m; sourceTree = "<group>"; };
 		FC7B9E491A474394008E325A /* TCPlanetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPlanetNode.h; sourceTree = "<group>"; };
 		FC7B9E4A1A474394008E325A /* TCPlanetNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPlanetNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +106,8 @@
 				FC26F9101A3E74C000404028 /* TCVRCameraNode.m */,
 				FC7B9E491A474394008E325A /* TCPlanetNode.h */,
 				FC7B9E4A1A474394008E325A /* TCPlanetNode.m */,
+				FC61C4151A4B441100FE943D /* TCCardboardMagneticSensor.h */,
+				FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */,
 				FC2609C41A3A68590000E7A4 /* Main.storyboard */,
 				FC2609C71A3A68590000E7A4 /* Images.xcassets */,
 				FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */,
@@ -242,6 +247,7 @@
 				FC2609C01A3A68590000E7A4 /* AppDelegate.m in Sources */,
 				FC2609BD1A3A68590000E7A4 /* main.m in Sources */,
 				FC7B9E4B1A474394008E325A /* TCPlanetNode.m in Sources */,
+				FC61C4171A4B441100FE943D /* TCCardboardMagneticSensor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

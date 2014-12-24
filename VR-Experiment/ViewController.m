@@ -14,6 +14,17 @@
 
 @interface ViewController ()
 
+@property (nonatomic) TCVRCameraNode *vrCameraNode;
+
+@property (nonatomic) TCCardboardMagneticSensor *magneticSensor;
+
+@property (nonatomic) SCNVector3 cameraPosition1;
+@property (nonatomic) SCNVector3 cameraPosition2;
+@property (nonatomic) SCNVector3 cameraPosition3;
+@property (nonatomic) SCNVector3 cameraPosition4;
+@property (nonatomic) NSInteger currentCameraPosition;
+
+
 @end
 
 @implementation ViewController
@@ -31,14 +42,14 @@
     
     
     // Create camera and add to the scene and views
-    TCVRCameraNode *vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
-    [scene.rootNode addChildNode:vrCameraNode];
-    _leftSceneView.pointOfView = vrCameraNode.leftCameraNode;
-    _rightSceneView.pointOfView = vrCameraNode.rightCameraNode;
+    _vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
+    [scene.rootNode addChildNode:_vrCameraNode];
+    _leftSceneView.pointOfView = _vrCameraNode.leftCameraNode;
+    _rightSceneView.pointOfView = _vrCameraNode.rightCameraNode;
     
     // Create the central orbit point
     SCNNode *orbitPoint = [SCNNode node];
-    orbitPoint.position = SCNVector3Make(vrCameraNode.position.x, vrCameraNode.position.y, vrCameraNode.position.z);
+    orbitPoint.position = SCNVector3Make(_vrCameraNode.position.x, _vrCameraNode.position.y, _vrCameraNode.position.z);
     [scene.rootNode addChildNode:orbitPoint];
     
     
@@ -105,7 +116,18 @@
     [orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
     
     // Set the viewing position
-    vrCameraNode.position = SCNVector3Make(0, 0, 50);
+    _currentCameraPosition = 0;
+    _cameraPosition1 = SCNVector3Make(0, 0, 50);
+    _cameraPosition2 = SCNVector3Make(0, 0, 40);
+    _cameraPosition3 = SCNVector3Make(0, 0, 30);
+    _cameraPosition4 = SCNVector3Make(0, 0, 20);
+    [self changeCameraPosition];
+
+//    _vrCameraNode.position = SCNVector3Make(0, 0, 50);
+    
+    // Magnetic Sensor
+    _magneticSensor = [[TCCardboardMagneticSensor alloc] init];
+    _magneticSensor.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,8 +135,42 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Helper Methods
+
+- (void)changeCameraPosition {
+    switch (_currentCameraPosition) {
+        case 0:
+            _vrCameraNode.position = _cameraPosition1;
+            _currentCameraPosition = 1;
+            break;
+        case 1:
+            _vrCameraNode.position = _cameraPosition2;
+            _currentCameraPosition = 2;
+            break;
+        case 2:
+            _vrCameraNode.position = _cameraPosition3;
+            _currentCameraPosition = 3;
+            break;
+        case 3:
+            _vrCameraNode.position = _cameraPosition4;
+            _currentCameraPosition = 4;
+            break;
+        case 4:
+            _vrCameraNode.position = _cameraPosition1;
+            _currentCameraPosition = 1;
+            break;
+        default:
+            break;
+    }
+}
+
+
+#pragma mark - TCCardboardMagneticSensorDelegate
+
+- (void)onCardboardTrigger {
+    NSLog(@"onCardboardTrigger!");
+    [self changeCameraPosition];
+}
 
 
 #pragma mark - Conversion Methods
