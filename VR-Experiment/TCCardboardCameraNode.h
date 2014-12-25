@@ -1,5 +1,5 @@
 //
-//  TCVRCameraNode.h
+//  TCCardboardCameraNode.h
 //  VR-Experiment
 //
 //  Created by Tim Carlson on 12/14/14.
@@ -12,7 +12,7 @@
 
 /** A camera node for SceneKit that handles movement via the device-motion in a virtual reality space. Provides camera motion to simulate head movement (roll, pitch and yaw).
  */
-@interface TCVRCameraNode : SCNNode
+@interface TCCardboardCameraNode : SCNNode
 
 #pragma mark - Properties
 

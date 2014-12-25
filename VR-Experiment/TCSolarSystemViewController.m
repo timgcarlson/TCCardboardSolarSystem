@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  TCSolarSystemViewController.m
 //  VR-Experiment
 //
 //  Created by Tim Carlson on 12/11/14.
@@ -8,13 +8,13 @@
 //  Using planet bitmaps from http://freebitmaps.blogspot.com/search?updated-max=2010-12-16T19:40:00-08:00&max-results=3
 //
 
-#import "ViewController.h"
-#import "TCVRCameraNode.h"
+#import "TCSolarSystemViewController.h"
+#import "TCCardboardCameraNode.h"
 #import "TCPlanetNode.h"
 
-@interface ViewController ()
+@interface TCSolarSystemViewController ()
 
-@property (nonatomic) TCVRCameraNode *vrCameraNode;
+@property (nonatomic) TCCardboardCameraNode *vrCameraNode;
 
 @property (nonatomic) TCCardboardMagneticSensor *magneticSensor;
 
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation ViewController
+@implementation TCSolarSystemViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,7 +42,7 @@
     
     
     // Create camera and add to the scene and views
-    _vrCameraNode = [[TCVRCameraNode alloc] initWithCameraMotion:YES];
+    _vrCameraNode = [[TCCardboardCameraNode alloc] initWithCameraMotion:YES];
     [scene.rootNode addChildNode:_vrCameraNode];
     _leftSceneView.pointOfView = _vrCameraNode.leftCameraNode;
     _rightSceneView.pointOfView = _vrCameraNode.rightCameraNode;

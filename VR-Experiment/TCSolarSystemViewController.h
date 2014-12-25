@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TCSolarSystemViewController.h
 //  VR-Experiment
 //
 //  Created by Tim Carlson on 12/11/14.
@@ -11,7 +11,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "TCCardboardMagneticSensor.h"
 
-@interface ViewController : UIViewController <TCCardboardMagneticSensorDelegate>
+@interface TCSolarSystemViewController : UIViewController <TCCardboardMagneticSensorDelegate>
 
 @property (nonatomic) IBOutlet SCNView *leftSceneView;
 @property (nonatomic) IBOutlet SCNView *rightSceneView;

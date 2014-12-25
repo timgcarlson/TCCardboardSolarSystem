@@ -1,14 +1,14 @@
 //
-//  TCVRCameraNode.m
+//  TCCardboardCameraNode.m
 //  VR-Experiment
 //
 //  Created by Tim Carlson on 12/14/14.
 //  Copyright (c) 2014 Tim Carlson. All rights reserved.
 //
 
-#import "TCVRCameraNode.h"
+#import "TCCardboardCameraNode.h"
 
-@interface TCVRCameraNode ()
+@interface TCCardboardCameraNode ()
 
 @property (nonatomic) SCNCamera *leftCamera;
 @property (nonatomic) SCNCamera *rightCamera;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation TCVRCameraNode
+@implementation TCCardboardCameraNode
 
 - (instancetype)init {
     return [self initWithCameraMotion:YES];
