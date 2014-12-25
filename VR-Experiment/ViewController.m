@@ -168,7 +168,6 @@
 #pragma mark - TCCardboardMagneticSensorDelegate
 
 - (void)onCardboardTrigger {
-    NSLog(@"onCardboardTrigger!");
     [self changeCameraPosition];
 }
 
