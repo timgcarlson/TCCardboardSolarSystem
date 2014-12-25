@@ -49,7 +49,7 @@
     
     // Create the central orbit point
     SCNNode *orbitPoint = [SCNNode node];
-    orbitPoint.position = SCNVector3Make(_vrCameraNode.position.x, _vrCameraNode.position.y, _vrCameraNode.position.z);
+    orbitPoint.position = SCNVector3Make(0, 0, 0);
     [scene.rootNode addChildNode:orbitPoint];
     
     
@@ -117,10 +117,10 @@
     
     // Set the viewing position
     _currentCameraPosition = 0;
-    _cameraPosition1 = SCNVector3Make(0, 0, 50);
-    _cameraPosition2 = SCNVector3Make(0, 0, 40);
-    _cameraPosition3 = SCNVector3Make(0, 0, 30);
-    _cameraPosition4 = SCNVector3Make(0, 0, 20);
+    _cameraPosition1 = SCNVector3Make(0, 0, -50);
+    _cameraPosition2 = SCNVector3Make(0, 0, -40);
+    _cameraPosition3 = SCNVector3Make(0, 0, -30);
+    _cameraPosition4 = SCNVector3Make(0, 0, -20);
     [self changeCameraPosition];
 
 //    _vrCameraNode.position = SCNVector3Make(0, 0, 50);

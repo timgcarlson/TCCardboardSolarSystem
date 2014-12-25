@@ -53,7 +53,7 @@
         SCNNode *camerasNode = [SCNNode node];
         [camerasNode addChildNode:self.leftCameraNode];
         [camerasNode addChildNode:self.rightCameraNode];
-        camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:-90.f], 0, 0);
+        camerasNode.eulerAngles = SCNVector3Make([self degreesToRadians:90.f], 0, 0);
         
         // Roll: (1, 0, 0)
         _rollNode = [SCNNode node];
@@ -92,13 +92,13 @@
                                                     withHandler:^(CMDeviceMotion *motion, NSError *error) {
                                                         CMAttitude *currentAttitude = motion.attitude;
                                                         double roll = currentAttitude.roll;
-                                                        double pitch = currentAttitude.pitch;
                                                         double yaw = currentAttitude.yaw;
+                                                        double pitch = currentAttitude.pitch;
                                                         
                                                         // update the cameras (roll, yaw, pitch)
-                                                        _rollNode.eulerAngles = SCNVector3Make(roll, 0, 0);
+                                                        _rollNode.eulerAngles = SCNVector3Make(-roll, 0, 0);
+                                                        _yawNode.eulerAngles = SCNVector3Make(0, -yaw, 0);
                                                         _pitchNode.eulerAngles = SCNVector3Make(0, 0, pitch);
-                                                        _yawNode.eulerAngles = SCNVector3Make(0, yaw, 0);
                                                     }];
 }
 
