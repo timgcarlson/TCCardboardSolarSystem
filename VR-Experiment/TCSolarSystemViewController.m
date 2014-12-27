@@ -14,6 +14,10 @@
 
 @interface TCSolarSystemViewController ()
 
+@property (nonatomic) SCNScene *scene;
+
+@property (nonatomic) SCNNode *orbitPoint;
+
 @property (nonatomic) TCCardboardCameraNode *vrCameraNode;
 
 @property (nonatomic) TCCardboardMagneticSensor *magneticSensor;
@@ -24,8 +28,10 @@
 @property (nonatomic) SCNVector3 cameraPosition4;
 @property (nonatomic) NSInteger currentCameraPosition;
 
+@property (nonatomic) NSMutableArray *currentPlanets;
 
 @end
+
 
 @implementation TCSolarSystemViewController
 
@@ -33,28 +39,28 @@
     [super viewDidLoad];
     
     // Create the scene
-    SCNScene *scene = [SCNScene scene];
-    _leftSceneView.scene = scene;
-    _rightSceneView.scene = scene;
+    _scene = [SCNScene scene];
+    _leftSceneView.scene = _scene;
+    _rightSceneView.scene = _scene;
     
     // right, left, top, bottom, back, front (+X, -X, +Y, -Y, +Z, -Z)
-    scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
+    _scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
     
     
     // Create camera and add to the scene and views
     _vrCameraNode = [[TCCardboardCameraNode alloc] initWithCameraMotion:YES];
-    [scene.rootNode addChildNode:_vrCameraNode];
+    [_scene.rootNode addChildNode:_vrCameraNode];
     _leftSceneView.pointOfView = _vrCameraNode.leftCameraNode;
     _rightSceneView.pointOfView = _vrCameraNode.rightCameraNode;
     
     // Create the central orbit point
-    SCNNode *orbitPoint = [SCNNode node];
-    orbitPoint.position = SCNVector3Make(0, 0, 0);
-    [scene.rootNode addChildNode:orbitPoint];
+    _orbitPoint = [SCNNode node];
+    _orbitPoint.position = SCNVector3Make(0, 0, 0);
+    [_scene.rootNode addChildNode:_orbitPoint];
     
     
-    /////// Add the sun
-    orbitPoint.geometry = [SCNSphere sphereWithRadius:3.0];
+    // Add the sun
+    _orbitPoint.geometry = [SCNSphere sphereWithRadius:3.0];
     SCNNode *sunHaloNode = [SCNNode node];
     sunHaloNode.geometry = [SCNPlane planeWithWidth:40 height:40];
     sunHaloNode.rotation = SCNVector4Make(1, 0, 0, M_PI / 180.0);
@@ -62,18 +68,18 @@
     sunHaloNode.geometry.firstMaterial.lightingModelName = SCNLightingModelConstant;
     sunHaloNode.geometry.firstMaterial.writesToDepthBuffer = NO;
     sunHaloNode.opacity = 0.3;
-    [orbitPoint addChildNode:sunHaloNode];
+    [_orbitPoint addChildNode:sunHaloNode];
     
-    orbitPoint.geometry.firstMaterial.multiply.contents = [UIImage imageNamed:@"sun"];
-    orbitPoint.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"sun"];
-    orbitPoint.geometry.firstMaterial.multiply.intensity = 0.5;
-    orbitPoint.geometry.firstMaterial.lightingModelName = SCNLightingModelConstant;
+    _orbitPoint.geometry.firstMaterial.multiply.contents = [UIImage imageNamed:@"sun"];
+    _orbitPoint.geometry.firstMaterial.diffuse.contents = [UIImage imageNamed:@"sun"];
+    _orbitPoint.geometry.firstMaterial.multiply.intensity = 0.5;
+    _orbitPoint.geometry.firstMaterial.lightingModelName = SCNLightingModelConstant;
     
-    orbitPoint.geometry.firstMaterial.multiply.wrapS =
-    orbitPoint.geometry.firstMaterial.diffuse.wrapS  =
-    orbitPoint.geometry.firstMaterial.multiply.wrapT =
-    orbitPoint.geometry.firstMaterial.diffuse.wrapT  = SCNWrapModeRepeat;
-    orbitPoint.geometry.firstMaterial.locksAmbientWithDiffuse   = YES;
+    _orbitPoint.geometry.firstMaterial.multiply.wrapS =
+    _orbitPoint.geometry.firstMaterial.diffuse.wrapS  =
+    _orbitPoint.geometry.firstMaterial.multiply.wrapT =
+    _orbitPoint.geometry.firstMaterial.diffuse.wrapT  = SCNWrapModeRepeat;
+    _orbitPoint.geometry.firstMaterial.locksAmbientWithDiffuse   = YES;
     
     // Achieve a lava effect by animating textures
     CABasicAnimation *sunAnimation = [CABasicAnimation animationWithKeyPath:@"contentsTransform"];
@@ -81,30 +87,15 @@
     sunAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0), CATransform3DMakeScale(3, 3, 3))];
     sunAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(1, 0, 0), CATransform3DMakeScale(3, 3, 3))];
     sunAnimation.repeatCount = FLT_MAX;
-    [orbitPoint.geometry.firstMaterial.diffuse addAnimation:sunAnimation forKey:@"sun-texture"];
+    [_orbitPoint.geometry.firstMaterial.diffuse addAnimation:sunAnimation forKey:@"sun-texture"];
     
     sunAnimation = [CABasicAnimation animationWithKeyPath:@"contentsTransform"];
     sunAnimation.duration = 30.0;
     sunAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0), CATransform3DMakeScale(5, 5, 5))];
     sunAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(CATransform3DMakeTranslation(1, 0, 0), CATransform3DMakeScale(5, 5, 5))];
     sunAnimation.repeatCount = FLT_MAX;
-    [orbitPoint.geometry.firstMaterial.multiply addAnimation:sunAnimation forKey:@"sun-texture2"];
-    ////////
+    [_orbitPoint.geometry.firstMaterial.multiply addAnimation:sunAnimation forKey:@"sun-texture2"];
     
-    
-    // Create misc planets
-    for (int i = 0; i < 13; i++) {
-        TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:orbitPoint];
-        [aPlanetNode startAnimating];
-    }
-
-//    TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:orbitPoint];
-//    [aPlanetNode startAnimating];
-//    
-//    TCPlanetNode *aMoonNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:aPlanetNode];
-//    [aMoonNode startAnimating];
-    
-
     // Add light to scene
     SCNNode *omnilightNode = [SCNNode node];
     omnilightNode.light = [SCNLight light];
@@ -113,19 +104,26 @@
     omnilightNode.light.attenuationStartDistance = 0.f;
     omnilightNode.light.attenuationEndDistance = 100.f;
     omnilightNode.light.attenuationFalloffExponent = 2.f;
-    [orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
+    [_orbitPoint addChildNode:omnilightNode];    // Orbiting from point of sun
     
-    // Set the viewing position
+    // Create misc planets
+    _currentPlanets = [NSMutableArray array];
+//    for (int i = 0; i < 13; i++) {
+//        TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:_orbitPoint];
+//        [_currentPlanets addObject:aPlanetNode];
+//        [aPlanetNode startAnimating];
+//    }
+    [self createNewSolarSystem];
+    
+    // Set the viewing positions
     _currentCameraPosition = 0;
     _cameraPosition1 = SCNVector3Make(0, 0, -50);
     _cameraPosition2 = SCNVector3Make(0, 0, -40);
     _cameraPosition3 = SCNVector3Make(0, 0, -30);
     _cameraPosition4 = SCNVector3Make(0, 0, -20);
     [self changeCameraPosition];
-
-//    _vrCameraNode.position = SCNVector3Make(0, 0, 50);
     
-    // Magnetic Sensor
+    // Magnetic Sensor Trigger
     _magneticSensor = [[TCCardboardMagneticSensor alloc] init];
     _magneticSensor.delegate = self;
 }
@@ -164,11 +162,33 @@
     }
 }
 
+- (void)createNewSolarSystem {
+    if (_currentPlanets.count) {
+        // Remove all existing planets...
+        for (TCPlanetNode *planet in _currentPlanets) {
+            [planet removeFromParentNode];
+        }
+        _currentPlanets = [NSMutableArray array];
+    }
+    for (int i = 0; i < 13; i++) {
+        TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:_orbitPoint];
+        [_currentPlanets addObject:aPlanetNode];
+        [aPlanetNode startAnimating];
+    }
+}
 
 #pragma mark - TCCardboardMagneticSensorDelegate
 
 - (void)onCardboardTrigger {
-    [self changeCameraPosition];
+//    [self changeCameraPosition];
+    
+//    if (_scene.paused) {
+//        [_scene setPaused:NO];
+//    } else {
+//        [_scene setPaused:YES];
+//    }
+    
+    [self createNewSolarSystem];
 }
 
 

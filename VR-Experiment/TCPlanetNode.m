@@ -112,4 +112,9 @@ static const NSInteger TCNumberOfTextures = 13;   // Includes 0 index
     [_planetNode addAnimation:planetRotationAnimation forKey:@"planet rotation"];
 }
 
+- (void)removeFromParentNode {
+    [super removeFromParentNode];
+    [self.rotationNode removeFromParentNode];
+}
+
 @end

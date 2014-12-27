@@ -29,4 +29,6 @@ static NSString * const TCPlanetTextureDictionary = @"textureDictionary";
 
 - (void)startAnimating;
 
+- (void)removeFromParentNode;
+
 @end
