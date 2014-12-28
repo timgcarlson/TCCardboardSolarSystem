@@ -13,12 +13,12 @@
 		FC2609C61A3A68590000E7A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2609C41A3A68590000E7A4 /* Main.storyboard */; };
 		FC2609C81A3A68590000E7A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2609C71A3A68590000E7A4 /* Images.xcassets */; };
 		FC2609CB1A3A68590000E7A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */; };
-		FC2609D71A3A68590000E7A4 /* VR_ExperimentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */; };
+		FC2609D71A3A68590000E7A4 /* TCCardboardSolarSystemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2609D61A3A68590000E7A4 /* TCCardboardSolarSystemTests.m */; };
 		FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */; };
 		FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E21A3A68810000E7A4 /* SceneKit.framework */; };
 		FC26F9111A3E74C000404028 /* TCCardboardCameraNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC26F9101A3E74C000404028 /* TCCardboardCameraNode.m */; };
 		FC61C4171A4B441100FE943D /* TCCardboardMagneticSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */; };
-		FC7B9E4B1A474394008E325A /* TCPlanetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B9E4A1A474394008E325A /* TCPlanetNode.m */; };
+		FC7B9E4B1A474394008E325A /* TCPlanTCCardboardSolarSystemetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B9E4A1A474394008E325A /* TCPlanetNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,12 +27,12 @@
 			containerPortal = FC2609AF1A3A68590000E7A4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FC2609B61A3A68590000E7A4;
-			remoteInfo = "VR-Experiment";
+			remoteInfo = "TCCardboardSolarSystem";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC2609B71A3A68590000E7A4 /* VR-Experiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VR-Experiment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2609B71A3A68590000E7A4 /* TCCardboardSolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCCardboardSolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2609BB1A3A68590000E7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC2609BC1A3A68590000E7A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC2609BE1A3A68590000E7A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,9 +42,9 @@
 		FC2609C51A3A68590000E7A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC2609C71A3A68590000E7A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FC2609CA1A3A68590000E7A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		FC2609D01A3A68590000E7A4 /* VR-ExperimentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VR-ExperimentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2609D01A3A68590000E7A4 /* TCCardboardSolarSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCCardboardSolarSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2609D51A3A68590000E7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VR_ExperimentTests.m; sourceTree = "<group>"; };
+		FC2609D61A3A68590000E7A4 /* TCCardboardSolarSystemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCCardboardSolarSystemTests.m; sourceTree = "<group>"; };
 		FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FC2609E21A3A68810000E7A4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		FC26F90F1A3E74C000404028 /* TCCardboardCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCardboardCameraNode.h; sourceTree = "<group>"; };
@@ -80,8 +80,8 @@
 			children = (
 				FC2609E21A3A68810000E7A4 /* SceneKit.framework */,
 				FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */,
-				FC2609B91A3A68590000E7A4 /* VR-Experiment */,
-				FC2609D31A3A68590000E7A4 /* VR-ExperimentTests */,
+				FC2609B91A3A68590000E7A4 /* TCCardboardSolarSystem */,
+				FC2609D31A3A68590000E7A4 /* TCCardboardSolarSystemTests */,
 				FC2609B81A3A68590000E7A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,13 +89,13 @@
 		FC2609B81A3A68590000E7A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC2609B71A3A68590000E7A4 /* VR-Experiment.app */,
-				FC2609D01A3A68590000E7A4 /* VR-ExperimentTests.xctest */,
+				FC2609B71A3A68590000E7A4 /* TCCardboardSolarSystem.app */,
+				FC2609D01A3A68590000E7A4 /* TCCardboardSolarSystemTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FC2609B91A3A68590000E7A4 /* VR-Experiment */ = {
+		FC2609B91A3A68590000E7A4 /* TCCardboardSolarSystem */ = {
 			isa = PBXGroup;
 			children = (
 				FC2609C41A3A68590000E7A4 /* Main.storyboard */,
@@ -110,7 +110,7 @@
 				FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */,
 				FC2609BA1A3A68590000E7A4 /* Supporting Files */,
 			);
-			path = "VR-Experiment";
+			path = "TCCardboardSolarSystem";
 			sourceTree = "<group>";
 		};
 		FC2609BA1A3A68590000E7A4 /* Supporting Files */ = {
@@ -122,13 +122,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FC2609D31A3A68590000E7A4 /* VR-ExperimentTests */ = {
+		FC2609D31A3A68590000E7A4 /* TCCardboardSolarSystemTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC2609D61A3A68590000E7A4 /* VR_ExperimentTests.m */,
+				FC2609D61A3A68590000E7A4 /* TCCardboardSolarSystemTests.m */,
 				FC2609D41A3A68590000E7A4 /* Supporting Files */,
 			);
-			path = "VR-ExperimentTests";
+			path = "TCCardboardSolarSystemTests";
 			sourceTree = "<group>";
 		};
 		FC2609D41A3A68590000E7A4 /* Supporting Files */ = {
@@ -153,9 +153,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FC2609B61A3A68590000E7A4 /* VR-Experiment */ = {
+		FC2609B61A3A68590000E7A4 /* TCCardboardSolarSystem */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC2609DA1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "VR-Experiment" */;
+			buildConfigurationList = FC2609DA1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "TCCardboardSolarSystem" */;
 			buildPhases = (
 				FC2609B31A3A68590000E7A4 /* Sources */,
 				FC2609B41A3A68590000E7A4 /* Frameworks */,
@@ -165,14 +165,14 @@
 			);
 			dependencies = (
 			);
-			name = "VR-Experiment";
-			productName = "VR-Experiment";
-			productReference = FC2609B71A3A68590000E7A4 /* VR-Experiment.app */;
+			name = TCCardboardSolarSystem;
+			productName = "TCCardboardSolarSystem";
+			productReference = FC2609B71A3A68590000E7A4 /* TCCardboardSolarSystem.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FC2609CF1A3A68590000E7A4 /* VR-ExperimentTests */ = {
+		FC2609CF1A3A68590000E7A4 /* TCCardboardSolarSystemTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC2609DD1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "VR-ExperimentTests" */;
+			buildConfigurationList = FC2609DD1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "TCCardboardSolarSystemTests" */;
 			buildPhases = (
 				FC2609CC1A3A68590000E7A4 /* Sources */,
 				FC2609CD1A3A68590000E7A4 /* Frameworks */,
@@ -183,9 +183,9 @@
 			dependencies = (
 				FC2609D21A3A68590000E7A4 /* PBXTargetDependency */,
 			);
-			name = "VR-ExperimentTests";
-			productName = "VR-ExperimentTests";
-			productReference = FC2609D01A3A68590000E7A4 /* VR-ExperimentTests.xctest */;
+			name = TCCardboardSolarSystemTests;
+			productName = "TCCardboardSolarSystemTests";
+			productReference = FC2609D01A3A68590000E7A4 /* TCCardboardSolarSystemTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FC2609B21A3A68590000E7A4 /* Build configuration list for PBXProject "VR-Experiment" */;
+			buildConfigurationList = FC2609B21A3A68590000E7A4 /* Build configuration list for PBXProject "TCCardboardSolarSystem" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -219,8 +219,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FC2609B61A3A68590000E7A4 /* VR-Experiment */,
-				FC2609CF1A3A68590000E7A4 /* VR-ExperimentTests */,
+				FC2609B61A3A68590000E7A4 /* TCCardboardSolarSystem */,
+				FC2609CF1A3A68590000E7A4 /* TCCardboardSolarSystemTests */,
 			);
 		};
 /* End PBXProject section */
@@ -263,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2609D71A3A68590000E7A4 /* VR_ExperimentTests.m in Sources */,
+				FC2609D71A3A68590000E7A4 /* TCCardboardSolarSystemTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +272,7 @@
 /* Begin PBXTargetDependency section */
 		FC2609D21A3A68590000E7A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FC2609B61A3A68590000E7A4 /* VR-Experiment */;
+			target = FC2609B61A3A68590000E7A4 /* TCCardboardSolarSystem */;
 			targetProxy = FC2609D11A3A68590000E7A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -377,9 +377,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "VR-Experiment/Info.plist";
+				INFOPLIST_FILE = "TCCardboardSolarSystem/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TCCardboardSolarSystem;
 			};
 			name = Debug;
 		};
@@ -387,9 +387,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "VR-Experiment/Info.plist";
+				INFOPLIST_FILE = "TCCardboardSolarSystem/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TCCardboardSolarSystem;
 			};
 			name = Release;
 		};
@@ -405,10 +405,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "VR-ExperimentTests/Info.plist";
+				INFOPLIST_FILE = "TCCardboardSolarSystemTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VR-Experiment.app/VR-Experiment";
+				PRODUCT_NAME = TCCardboardSolarSystemTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCCardboardSolarSystem.app/TCCardboardSolarSystem";
 			};
 			name = Debug;
 		};
@@ -420,17 +420,17 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "VR-ExperimentTests/Info.plist";
+				INFOPLIST_FILE = "TCCardboardSolarSystemTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VR-Experiment.app/VR-Experiment";
+				PRODUCT_NAME = TCCardboardSolarSystemTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCCardboardSolarSystem.app/TCCardboardSolarSystem";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FC2609B21A3A68590000E7A4 /* Build configuration list for PBXProject "VR-Experiment" */ = {
+		FC2609B21A3A68590000E7A4 /* Build configuration list for PBXProject "TCCardboardSolarSystem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FC2609D81A3A68590000E7A4 /* Debug */,
@@ -439,7 +439,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC2609DA1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "VR-Experiment" */ = {
+		FC2609DA1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "TCCardboardSolarSystem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FC2609DB1A3A68590000E7A4 /* Debug */,
@@ -448,7 +448,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC2609DD1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "VR-ExperimentTests" */ = {
+		FC2609DD1A3A68590000E7A4 /* Build configuration list for PBXNativeTarget "TCCardboardSolarSystemTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FC2609DE1A3A68590000E7A4 /* Debug */,
