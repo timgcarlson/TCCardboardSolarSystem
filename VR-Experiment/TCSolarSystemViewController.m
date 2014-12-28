@@ -108,12 +108,7 @@
     
     // Create misc planets
     _currentPlanets = [NSMutableArray array];
-//    for (int i = 0; i < 13; i++) {
-//        TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:_orbitPoint];
-//        [_currentPlanets addObject:aPlanetNode];
-//        [aPlanetNode startAnimating];
-//    }
-    [self createNewSolarSystem];
+    [self createNewSolarSystemWith:13];
     
     // Set the viewing positions
     _currentCameraPosition = 0;
@@ -162,7 +157,7 @@
     }
 }
 
-- (void)createNewSolarSystem {
+- (void)createNewSolarSystemWith:(NSUInteger)numberOfPlanets {
     if (_currentPlanets.count) {
         // Remove all existing planets...
         for (TCPlanetNode *planet in _currentPlanets) {
@@ -170,7 +165,7 @@
         }
         _currentPlanets = [NSMutableArray array];
     }
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < numberOfPlanets; i++) {
         TCPlanetNode *aPlanetNode = [[TCPlanetNode alloc] initWithPlanetAttributes:nil aboutOrbitNode:_orbitPoint];
         [_currentPlanets addObject:aPlanetNode];
         [aPlanetNode startAnimating];
@@ -188,7 +183,7 @@
 //        [_scene setPaused:YES];
 //    }
     
-    [self createNewSolarSystem];
+    [self createNewSolarSystemWith:13];
 }
 
 

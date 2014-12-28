@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <SceneKit/SceneKit.h>
-#import <CoreMotion/CoreMotion.h>
 #import "TCCardboardMagneticSensor.h"
 
 @interface TCSolarSystemViewController : UIViewController <TCCardboardMagneticSensorDelegate>
