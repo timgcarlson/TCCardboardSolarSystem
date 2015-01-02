@@ -17,8 +17,9 @@
 		FC2609E11A3A687B0000E7A4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E01A3A687B0000E7A4 /* CoreMotion.framework */; };
 		FC2609E31A3A68810000E7A4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2609E21A3A68810000E7A4 /* SceneKit.framework */; };
 		FC26F9111A3E74C000404028 /* TCCardboardCameraNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC26F9101A3E74C000404028 /* TCCardboardCameraNode.m */; };
+		FC501E061A55E7E70011E4AC /* TCCardboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC501E051A55E7E70011E4AC /* TCCardboardViewController.m */; };
 		FC61C4171A4B441100FE943D /* TCCardboardMagneticSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */; };
-		FC7B9E4B1A474394008E325A /* TCPlanTCCardboardSolarSystemetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B9E4A1A474394008E325A /* TCPlanetNode.m */; };
+		FC7B9E4B1A474394008E325A /* TCPlanetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B9E4A1A474394008E325A /* TCPlanetNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +28,7 @@
 			containerPortal = FC2609AF1A3A68590000E7A4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FC2609B61A3A68590000E7A4;
-			remoteInfo = "TCCardboardSolarSystem";
+			remoteInfo = TCCardboardSolarSystem;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -49,6 +50,8 @@
 		FC2609E21A3A68810000E7A4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		FC26F90F1A3E74C000404028 /* TCCardboardCameraNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCardboardCameraNode.h; sourceTree = "<group>"; };
 		FC26F9101A3E74C000404028 /* TCCardboardCameraNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCCardboardCameraNode.m; sourceTree = "<group>"; };
+		FC501E041A55E7E70011E4AC /* TCCardboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCardboardViewController.h; sourceTree = "<group>"; };
+		FC501E051A55E7E70011E4AC /* TCCardboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCCardboardViewController.m; sourceTree = "<group>"; };
 		FC61C4151A4B441100FE943D /* TCCardboardMagneticSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCardboardMagneticSensor.h; sourceTree = "<group>"; };
 		FC61C4161A4B441100FE943D /* TCCardboardMagneticSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCCardboardMagneticSensor.m; sourceTree = "<group>"; };
 		FC7B9E491A474394008E325A /* TCPlanetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPlanetNode.h; sourceTree = "<group>"; };
@@ -110,7 +113,7 @@
 				FC2609C91A3A68590000E7A4 /* LaunchScreen.xib */,
 				FC2609BA1A3A68590000E7A4 /* Supporting Files */,
 			);
-			path = "TCCardboardSolarSystem";
+			path = TCCardboardSolarSystem;
 			sourceTree = "<group>";
 		};
 		FC2609BA1A3A68590000E7A4 /* Supporting Files */ = {
@@ -128,7 +131,7 @@
 				FC2609D61A3A68590000E7A4 /* TCCardboardSolarSystemTests.m */,
 				FC2609D41A3A68590000E7A4 /* Supporting Files */,
 			);
-			path = "TCCardboardSolarSystemTests";
+			path = TCCardboardSolarSystemTests;
 			sourceTree = "<group>";
 		};
 		FC2609D41A3A68590000E7A4 /* Supporting Files */ = {
@@ -142,6 +145,8 @@
 		FCBF2CA61A4CAE09000657C2 /* TCCardboard */ = {
 			isa = PBXGroup;
 			children = (
+				FC501E041A55E7E70011E4AC /* TCCardboardViewController.h */,
+				FC501E051A55E7E70011E4AC /* TCCardboardViewController.m */,
 				FC26F90F1A3E74C000404028 /* TCCardboardCameraNode.h */,
 				FC26F9101A3E74C000404028 /* TCCardboardCameraNode.m */,
 				FC61C4151A4B441100FE943D /* TCCardboardMagneticSensor.h */,
@@ -166,7 +171,7 @@
 			dependencies = (
 			);
 			name = TCCardboardSolarSystem;
-			productName = "TCCardboardSolarSystem";
+			productName = TCCardboardSolarSystem;
 			productReference = FC2609B71A3A68590000E7A4 /* TCCardboardSolarSystem.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -184,7 +189,7 @@
 				FC2609D21A3A68590000E7A4 /* PBXTargetDependency */,
 			);
 			name = TCCardboardSolarSystemTests;
-			productName = "TCCardboardSolarSystemTests";
+			productName = TCCardboardSolarSystemTests;
 			productReference = FC2609D01A3A68590000E7A4 /* TCCardboardSolarSystemTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC501E061A55E7E70011E4AC /* TCCardboardViewController.m in Sources */,
 				FC26F9111A3E74C000404028 /* TCCardboardCameraNode.m in Sources */,
 				FC2609C31A3A68590000E7A4 /* TCSolarSystemViewController.m in Sources */,
 				FC2609C01A3A68590000E7A4 /* AppDelegate.m in Sources */,
@@ -377,7 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "TCCardboardSolarSystem/Info.plist";
+				INFOPLIST_FILE = TCCardboardSolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = TCCardboardSolarSystem;
 			};
@@ -387,7 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "TCCardboardSolarSystem/Info.plist";
+				INFOPLIST_FILE = TCCardboardSolarSystem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = TCCardboardSolarSystem;
 			};
@@ -405,7 +411,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "TCCardboardSolarSystemTests/Info.plist";
+				INFOPLIST_FILE = TCCardboardSolarSystemTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = TCCardboardSolarSystemTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCCardboardSolarSystem.app/TCCardboardSolarSystem";
@@ -420,7 +426,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "TCCardboardSolarSystemTests/Info.plist";
+				INFOPLIST_FILE = TCCardboardSolarSystemTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = TCCardboardSolarSystemTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCCardboardSolarSystem.app/TCCardboardSolarSystem";

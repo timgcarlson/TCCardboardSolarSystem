@@ -38,26 +38,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Create the scene
-    _scene = [SCNScene scene];
-    _leftSceneView.scene = _scene;
-    _rightSceneView.scene = _scene;
     
-    // right, left, top, bottom, back, front (+X, -X, +Y, -Y, +Z, -Z)
-    _scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
+    // Set up the scene
+    self.scene.background.contents = @[[UIImage imageNamed:@"stars_right1"], [UIImage imageNamed:@"stars_left2"], [UIImage imageNamed:@"stars_top3"], [UIImage imageNamed:@"stars_bottom4"], [UIImage imageNamed:@"stars_back6"], [UIImage imageNamed:@"stars_front5"]];
     
-    
-    // Create camera and add to the scene and views
+    // Create camera and add to the scene
     _vrCameraNode = [[TCCardboardCameraNode alloc] initWithCameraMotion:YES];
-    [_scene.rootNode addChildNode:_vrCameraNode];
-    _leftSceneView.pointOfView = _vrCameraNode.leftCameraNode;
-    _rightSceneView.pointOfView = _vrCameraNode.rightCameraNode;
+    [self addVRCamera:_vrCameraNode];
     
     // Create the central orbit point
     _orbitPoint = [SCNNode node];
     _orbitPoint.position = SCNVector3Make(0, 0, 0);
-    [_scene.rootNode addChildNode:_orbitPoint];
-    
+    [self.scene.rootNode addChildNode:_orbitPoint];
     
     // Add the sun
     _orbitPoint.geometry = [SCNSphere sphereWithRadius:3.0];

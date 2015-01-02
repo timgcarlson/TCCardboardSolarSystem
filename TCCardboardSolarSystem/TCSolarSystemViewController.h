@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <SceneKit/SceneKit.h>
+#import "TCCardboardViewController.h"
 #import "TCCardboardMagneticSensor.h"
 
-@interface TCSolarSystemViewController : UIViewController <TCCardboardMagneticSensorDelegate>
-
-@property (nonatomic) IBOutlet SCNView *leftSceneView;
-@property (nonatomic) IBOutlet SCNView *rightSceneView;
+@interface TCSolarSystemViewController : TCCardboardViewController <TCCardboardMagneticSensorDelegate>
 
 @end
 
