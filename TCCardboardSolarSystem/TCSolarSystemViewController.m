@@ -14,8 +14,6 @@
 
 @interface TCSolarSystemViewController ()
 
-@property (nonatomic) SCNScene *scene;
-
 @property (nonatomic) SCNNode *orbitPoint;
 
 @property (nonatomic) TCCardboardCameraNode *vrCameraNode;
