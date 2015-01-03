@@ -9,6 +9,10 @@ Even supports the magnetic trigger using a delegate protocol `TCCardboardMagneti
 
 The project uses two custom classes that give you basic VR support for iOS (`TCCardboardCameraNode` and `TCCardboardMagneticSensor`).
 
+## TCCardboardViewController
+
+Use this class to draw two SCNScenes on the view, one for the left eye and one for the right. Adding a TCCardboardCameraNode to TCCardboardViewController will assign each camera to a SCNScene. This view controller will handle the Auto Layout constraints for you.
+
 ## TCCardboardCameraNode
 
 Before creating a `TCCardboardCameraNode`, you will have to create a mirror image of two scenes. This project does this in the storyboard. Create the `TCCardboardCameraNode` and assign it's `leftCameraNode` to the left scene's `pointOfView` and the `rightCameraNode` to the right scene's `pointOfView`. This is now your camera that will handle all head tracking motion for you.
