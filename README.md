@@ -21,7 +21,3 @@ Before creating a `TCCardboardCameraNode`, you will have to create a mirror imag
 ## TCCardboardMagneticSensor
 
 Google Cardboard has a magnetic trigger on the left side. The ability to use this isn't unique to Android devices, as you just need to detect the disruption to the magnetic field around the device's compass. That is exatly what `TCCardboardMagneticSensor` handles for you. Simply inherit the `TCCardboardMagneticSensorDelegate` and create the method `onCardboardTrigger`, and you have yourself a basic input for your applicaiton.
-
-## Coming Soon
-
-I plan on wrapping up my VR classes into a separate project soon. In the meantime, feel free to take the two main classes above and use in your own projects.
